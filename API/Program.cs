@@ -14,7 +14,8 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext<StoreContext>(opt =>{
     opt.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection"));
 });
-
+//adding service for CORS, react (redering data from webapi)
+builder.Services.AddCors();
 var app = builder.Build(); //building app
 
 // Configure the HTTP request pipeline. //adding middlewere(software to addd inside software)
@@ -23,7 +24,11 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger(); //middleware
     app.UseSwaggerUI();
 }
-
+//middleware
+app.UseCors(opt =>
+{
+    opt.AllowAnyHeader().AllowAnyMethod().WithOrigins("http://localhost:3000");
+});
 //app.UseHttpsRedirection(); for production
 
 app.UseAuthorization();
