@@ -2,6 +2,8 @@ import { useEffect, useState } from "react";
 import { ListFormat } from "typescript";
 import { Product } from '../models/product';
 import Catalog from "../../features/catalog/catalog";
+import { Container, CssBaseline} from "@mui/material";
+import Header from "./Header";
 
 // const products =[
 //   {name: 'product1',price:100.00},
@@ -28,11 +30,15 @@ function App() {
   }
   
   return (
-    <div className="App">
-     <h1>Setipare Website on the way</h1>
-     <Catalog products={products} addProduct={addProduct}/>  
+    <>
+    <CssBaseline/>
+    <Header/>
+    <Container>
+    <Catalog products={products} addProduct={addProduct}/>  
+
+    </Container>
        
-    </div> 
+    </>
   );
 }
 
